@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8xhbtv8vi4qd"]
+
+[ext_resource type="Script" path="res://gun(hitscan).gd" id="1_ls7ql"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ag000"]
+size = Vector3(0.195853, 0.164973, 1.00015)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4nokp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42ib2"]
+size = Vector3(0.686427, 0.0964741, 0.78331)
+
+[node name="Gun(Hitscan)" type="RigidBody3D"]
+collision_layer = 2
+freeze = true
+script = ExtResource("1_ls7ql")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.996999, -0.0157362, 0.0757933, 0.0248435, 0.992371, -0.120761, -0.0733148, 0.122281, 0.989784, -0.0120294, -0.00547743, -0.0178626)
+shape = SubResource("BoxShape3D_ag000")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.124882, 0.0708292, -0.00361094, -0.000786736, -0.0786522, -0.155049, -0.0156657, 0.568576, -0.0209985, -0.00474036, -0.00384891, -0.00975357)
+mesh = SubResource("CylinderMesh_4nokp")
+
+[node name="HW_pickup_area" type="Area3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HW_pickup_area"]
+shape = SubResource("BoxShape3D_42ib2")
+
+[connection signal="body_entered" from="HW_pickup_area" to="." method="_on_hw_pickup_area_body_entered"]

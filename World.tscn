@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://6skro06fw5tq"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_m1t37"]
+[ext_resource type="PackedScene" uid="uid://dk6uyot5kcx6r" path="res://map.tscn" id="2_ar3ij"]
+[ext_resource type="PackedScene" uid="uid://m5lbjp4omncu" path="res://enemy.tscn" id="2_eodqu"]
+[ext_resource type="PackedScene" uid="uid://c8xhbtv8vi4qd" path="res://hitscangun.tscn" id="4_tb60s"]
+[ext_resource type="PackedScene" uid="uid://stqfmdjlg4nj" path="res://pweapon.tscn" id="5_cv8j3"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_m1t37")
+
+[node name="Node3D" parent="." instance=ExtResource("2_ar3ij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.09181, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.0
+offset_top = -229.0
+offset_right = 278.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+color = Color(0.619608, 0.670588, 0.745098, 1)
+
+[node name="MC" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="CanvasLayer/MainMenu/MC"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MC/Options"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="HostB" type="Button" parent="CanvasLayer/MainMenu/MC/Options"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinB" type="Button" parent="CanvasLayer/MainMenu/MC/Options"]
+layout_mode = 2
+text = "Join"
+
+[node name="address_input" type="LineEdit" parent="CanvasLayer/MainMenu/MC/Options"]
+layout_mode = 2
+placeholder_text = "Enter Address"
+alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn")
+spawn_path = NodePath("..")
+
+[node name="pweapon" parent="." instance=ExtResource("5_cv8j3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28974, -1.56262, 6.92308)
+
+[node name="Gun(Hitscan)" parent="." instance=ExtResource("4_tb60s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4239, -2.45627, -5.08317)
+
+[node name="enemy" parent="." instance=ExtResource("2_eodqu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.40699, 0, 6.65983)
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MC/Options/HostB" to="." method="_on_host_b_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MC/Options/JoinB" to="." method="_on_join_b_pressed"]

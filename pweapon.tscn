@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://stqfmdjlg4nj"]
+
+[ext_resource type="Script" path="res://projectilew.gd" id="1_p5hg4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ag000"]
+size = Vector3(0.195853, 0.164973, 1.00015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5epkc"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4nokp"]
+
+[node name="pweapon" type="RigidBody3D"]
+collision_layer = 2
+freeze = true
+script = ExtResource("1_p5hg4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.996999, -0.0157362, 0.0757933, 0.0248435, 0.992371, -0.120761, -0.0733148, 0.122281, 0.989784, 0.309931, -0.267568, -0.12973)
+shape = SubResource("BoxShape3D_ag000")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.124882, 0.0708292, -0.00361094, 9.30769e-06, -0.107406, -0.153784, -0.0156854, 0.563852, -0.0288402, 0.316216, -0.235135, -0.121621)
+material_override = SubResource("StandardMaterial3D_5epkc")
+mesh = SubResource("CylinderMesh_4nokp")
+
+[node name="muzzle" type="Node3D" parent="."]
